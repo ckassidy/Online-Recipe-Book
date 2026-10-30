@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sandok - Recipe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="recipe-page">
+
+  <header>
+    <a class="logo" href="index.html">
+      <img src="images/logo.png" alt="Sandok logo">
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="browse.html" class="active">Browse</a>
+      <a href="add-recipe.html" class="add-btn">+ Add Recipe</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <a href="browse.html" class="back-link">&larr; Back</a>
+
+    <div class="message-box hidden" id="message-box"></div>
+
+    <div class="recipe-layout">
+
+      <div class="recipe-left">
+        <img class="recipe-img" id="recipe-img" src="Placeholder.jpg" alt="Recipe picture">
+
+        <div class="recipe-title">
+          <h1 id="recipe-title"></h1>
+          <span class="tag" id="recipe-course"></span>
+          <span class="tag light" id="recipe-ingredient"></span>
+        </div>
+
+        <section class="info-card">
+          <h2>Ingredients</h2>
+          <ul id="ingredient-list"></ul>
+        </section>
+
+        <section class="info-card">
+          <h2>Instructions</h2>
+          <ol id="instruction-list"></ol>
+        </section>
+      </div>
+
+      <div class="recipe-right">
+        <section class="comment-card">
+          <h2>Comments <span id="comment-count">(0)</span></h2>
+
+          <form id="comment-form">
+            <label for="comment-name">Your Name</label>
+            <input type="text" id="comment-name" placeholder="Your name" required>
+
+            <label for="comment-text">Comment</label>
+            <textarea id="comment-text" placeholder="Write a comment..." required></textarea>
+
+            <button type="submit" class="btn-orange">Post Comment</button>
+          </form>
+
+          <div id="comment-list"></div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Sandok</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

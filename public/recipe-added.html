@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sandok - Recipe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="added-page">
+
+  <header>
+    <a class="logo" href="index.html">
+      <img src="images/logo.png" alt="Sandok logo">
+    </a>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="add-recipe.html" class="add-btn">+ Add Recipe</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="message-box hidden" id="message-box"></div>
+
+    <section class="recipe-card">
+      <img class="recipe-img" id="recipe-img" src="Placeholder.jpg" alt="Recipe picture">
+
+      <div class="title-row">
+        <h1 id="recipe-title"></h1>
+        <div class="edit-delete">
+
+          <a href="add-recipe.html" class="edit-btn" id="edit-btn">Edit</a>
+          <button type="button" class="delete-btn" id="delete-btn">Delete</button>
+        </div>
+      </div>
+
+      <h2>Ingredients</h2>
+      <ul id="ingredient-list"></ul>
+
+      <h2>Instructions</h2>
+      <ol id="instruction-list"></ol>
+    </section>
+
+    <div class="modal-overlay hidden" id="delete-modal">
+      <div class="modal">
+        <span class="trash-icon">&#128465;</span>
+        <h2 id="delete-title">Delete this recipe?</h2>
+        <p>This action can&rsquo;t be undone.</p>
+        <div class="modal-buttons">
+          <button type="button" class="btn-gray" id="cancel-delete">Cancel</button>
+          <button type="button" class="btn-delete-confirm" id="confirm-delete">Yes, Delete</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Sandok</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

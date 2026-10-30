@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sandok - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="home-page">
+
+  <header>
+    <a class="logo" href="index.html">
+      <img src="images/logo.png" alt="Sandok logo">
+    </a>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="add-recipe.html" class="add-btn">+ Add Recipe</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Find your next favorite recipe!</h1>
+
+      <form class="search-bar" action="browse.html" method="get">
+        <input type="text" name="q" placeholder="Search recipes, eg. adobo">
+        <button type="submit" class="btn-orange">Search</button>
+      </form>
+    </section>
+
+    <section class="popular">
+      <h2>Popular Recipes</h2>
+
+      <div class="card-list" id="popular-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Sandok</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sandok - Add Recipe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="add-page">
+
+  <header>
+    <a class="logo" href="index.html">
+      <img src="images/logo.png" alt="Sandok logo">
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="add-recipe.html" class="add-btn active">+ Add Recipe</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="form-card">
+
+      <div class="form-header">
+        <h2 id="form-heading">Add Recipe</h2>
+        <a href="index.html" class="close-btn" id="close-link">&#10006;</a>
+      </div>
+
+      <form id="recipe-form">
+        <label for="title">Title*</label>
+        <input type="text" id="title" placeholder="Write the title.." required>
+
+        <div class="form-row">
+          <div>
+            <label for="course">Course*</label>
+            <select id="course" required>
+              <option value="">Select course</option>
+              <option value="Appetizers">Appetizers</option>
+              <option value="Soups">Soups</option>
+              <option value="Main Dishes">Main Dishes</option>
+              <option value="Desserts">Desserts</option>
+            </select>
+          </div>
+          <div>
+            <label for="ingredient">Main Ingredient*</label>
+            <select id="ingredient" required>
+              <option value="">Select main ingredient</option>
+              <option value="Chicken">Chicken</option>
+              <option value="Pork">Pork</option>
+              <option value="Beef">Beef</option>
+              <option value="Seafood">Seafood</option>
+              <option value="Vegetables">Vegetables</option>
+              <option value="Rice">Rice</option>
+              <option value="Pasta">Pasta</option>
+              <option value="Eggs">Eggs</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="small">Image (optional)</label>
+        <div class="image-box">
+          <span id="image-name">Insert image</span>
+          <label for="image" class="choose-btn">Choose image</label>
+          <input type="file" id="image" accept="image/*" hidden>
+        </div>
+
+        <label for="ingredients">Ingredients* (one per line)</label>
+        <textarea id="ingredients" placeholder="List the ingredients..." required></textarea>
+
+        <label for="instructions">Instructions* (one step per line)</label>
+        <textarea id="instructions" placeholder="Describe the steps.." required></textarea>
+
+        <p class="form-message hidden" id="form-message"></p>
+
+        <div class="form-buttons">
+          <a href="index.html" class="btn-gray" id="cancel-link">Cancel</a>
+          <button type="submit" class="btn-orange">Save Recipe</button>
+        </div>
+      </form>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Sandok</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

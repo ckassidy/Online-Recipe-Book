@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sandok - Browse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="browse-page">
+
+  <header>
+    <a class="logo" href="index.html">
+      <img src="images/logo.png" alt="Sandok logo">
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="browse.html" class="active">Browse</a>
+      <a href="add-recipe.html" class="add-btn">+ Add Recipe</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <form class="search-bar" id="search-form">
+      <input type="text" id="search-input" placeholder="Search recipes, eg. adobo">
+      <button type="submit" class="btn-orange">Search</button>
+    </form>
+
+    <h2>Browse</h2>
+
+    <section class="filter-box">
+      <div class="filter-row">
+        <span class="filter-label">Course</span>
+        <button type="button" class="filter-button active" data-type="course" data-value="">All</button>
+        <button type="button" class="filter-button" data-type="course" data-value="Appetizers">Appetizers</button>
+        <button type="button" class="filter-button" data-type="course" data-value="Soups">Soups</button>
+        <button type="button" class="filter-button" data-type="course" data-value="Main Dishes">Main Dishes</button>
+        <button type="button" class="filter-button" data-type="course" data-value="Desserts">Desserts</button>
+      </div>
+
+      <div class="filter-row">
+        <span class="filter-label">Ingredient</span>
+        <button type="button" class="filter-button active" data-type="ingredient" data-value="">Any</button>
+        <button type="button" class="filter-button" data-type="ingredient" data-value="Chicken">Chicken</button>
+        <button type="button" class="filter-button" data-type="ingredient" data-value="Pork">Pork</button>
+        <button type="button" class="filter-button" data-type="ingredient" data-value="Beef">Beef</button>
+        <button type="button" class="filter-button" data-type="ingredient" data-value="Seafood">Seafood</button>
+        <button type="button" class="filter-button" data-type="ingredient" data-value="Vegetables">Vegetables</button>
+        <button type="button" class="filter-button" data-type="ingredient" data-value="Rice">Rice</button>
+        <button type="button" class="filter-button" data-type="ingredient" data-value="Pasta">Pasta</button>
+        <button type="button" class="filter-button" data-type="ingredient" data-value="Eggs">Eggs</button>
+      </div>
+    </section>
+
+    <section>
+      <div class="results-title">
+        <h2 id="results-heading">All Recipes</h2>
+        <span id="results-count"></span>
+      </div>
+
+      <div class="card-list" id="results-list"></div>
+
+      <div class="empty-box hidden" id="empty-box">
+        <h2>No recipes found</h2>
+        <a href="browse.html" class="btn-orange">Clear search</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Sandok</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
