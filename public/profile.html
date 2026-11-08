@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sandok - Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="profile-page">
+
+  <header>
+    <a class="logo" href="index.html">
+      <img src="images/logo.png" alt="Sandok logo">
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="add-recipe.html" class="add-btn">+ Add Recipe</a>
+      <a href="profile.html" class="active">Profile</a>
+      <a href="login.html" id="logout-link">Log Out</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <h2>Profile</h2>
+
+    <section class="profile-card">
+      <div class="avatar" id="avatar"></div>
+      <div class="profile-info">
+      <h1 id="profile-name"></h1>
+      <p id="profile-email"></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="results-title">
+        <h2>My Recipes</h2>
+        <span id="recipe-count"></span>
+      </div>
+      <p class="profile-hint">Click a recipe to edit or delete it.</p>
+
+      <div class="card-list" id="my-recipes"></div>
+
+      <div class="empty-box hidden" id="empty-box">
+        <h2>No recipes yet</h2>
+        <a href="add-recipe.html" class="btn-orange">Add a recipe</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Sandok</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
