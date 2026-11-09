@@ -271,7 +271,7 @@ async function newRecipePage() {
     deleteBtn?.addEventListener("click", () => deleteModal.classList.remove("hidden"));
     cancelDeleteBtn?.addEventListener("click", () => deleteModal.classList.add("hidden"));
     confirmDeleteBtn?.addEventListener("click", async () => {
-        await fetch(`${API}/${recipeId}`, {method; "DELETE"});
+        await fetch(`${API}/${recipeId}`, {method: "DELETE"});
         window.location.href = "profile.html";
     });
 }
