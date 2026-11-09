@@ -1,10 +1,24 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const multer = require("multer");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
 
-// Import your models
+// set up multer for file uploads
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "public/uploads/");
+    },
+    filename: function (req, file, cb) {
+        cb(null, "image-" + Date.now() + path.extname(file.originalname));
+    }
+});
+const upload = multer({ storage: storage });
+
+
+// import models
 const User = require("./models/user");
 const Recipe = require("./models/recipe");
 const Category = require("./models/category");
@@ -76,15 +90,16 @@ app.get("/recipes/:id", async (req, res) => {
 });
 
 //posting new recipe (UPDATED)
-app.post("/recipes", async (req, res) => {
+app.post("/recipes", upload.single("image"), async (req, res) => {
     try {
         const categoryDoc = await Category.findOne({ name: req.body.course });
+        const imagePath = req.file ? `/uploads/${req.file.filename}` : "";
 
         const newRecipe = new Recipe({
             title: req.body.title,
             course: req.body.course,
             ingredient: req.body.ingredient,
-            image: req.body.image || "",
+            image: imagePath,
             ingredients: req.body.ingredients,
             instructions: req.body.instructions,
             authorId: req.body.authorId,
@@ -98,21 +113,31 @@ app.post("/recipes", async (req, res) => {
     }
 });
 
-//editing recipe
-app.put("/recipes/:id", async (req, res) => {
-    const updatedRecipe = await Recipe.findByIdAndUpdate(
-        req.params.id,
-        {
+
+// editing recipe (UPDATED FOR FILE UPLOAD)
+app.put("/recipes/:id", upload.single("image"), async (req, res) => {
+    try {
+        const updateData = {
             title: req.body.title,
             course: req.body.course,
             ingredient: req.body.ingredient,
-            image: req.body.image,
             ingredients: req.body.ingredients,
             instructions: req.body.instructions,
-        },
-        {new: true}
-    );
-    res.json(updatedRecipe);
+        };
+
+        if (req.file) {
+            updateData.image = `/uploads/${req.file.filename}`;
+        }
+
+        const updatedRecipe = await Recipe.findByIdAndUpdate(
+            req.params.id,
+            updateData,
+            {new: true}
+        );
+        res.json(updatedRecipe);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
 });
 
 //deleting recipe

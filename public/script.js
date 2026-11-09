@@ -171,6 +171,7 @@ async function addEditPage() {
     const ingredientEl = document.getElementById("ingredient"); 
     const ingredientsEl = document.getElementById("ingredients"); 
     const instructionsEl = document.getElementById("instructions");
+    const imageInput = document.getElementById("image-input");
     const currentUser = JSON.parse(localStorage.getItem("sandokUser"));
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -185,33 +186,37 @@ async function addEditPage() {
         ingredientEl.value = recipe.ingredient;
         ingredientsEl.value = recipe.ingredients;
         instructionsEl.value = recipe.instructions;
+
+        if (recipe.image) {
+            document.getElementById("file-name-display").textContent = "Current: " + recipe.image.split('/').pop();
+        }
     }
 
     form?.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const data = {
-            title: titleEl.value,
-            course: courseEl.value,
-            ingredient: ingredientEl.value,
-            image: "",
-            ingredients: ingredientsEl.value,
-            instructions: instructionsEl.value,
-            authorId: currentUser._id // tells db who made it
-        };
+        const formData = new FormData();
+        formData.append("title", titleEl.value);
+        formData.append("course", courseEl.value);
+        formData.append("ingredient", ingredientEl.value);
+        formData.append("ingredients", ingredientsEl.value);
+        formData.append("instructions", instructionsEl.value);
+        formData.append("authorId", currentUser._id); // tells db who made it
+
+        if (imageInput && imageInput.files.length > 0) {
+            formData.append("image", imageInput.files[0]);
+        }
 
         let response;
         if(editId){ 
             response = await fetch(`${API}/${editId}`, {
                 method: "PUT",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(data)
+                body: formData
             });
         } else { 
             response = await fetch(API, {
                 method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(data)
+                body: formData
             }); 
         }
 

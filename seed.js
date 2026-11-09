@@ -71,7 +71,7 @@ async function seedDatabase() {
                 title: "Halo-Halo",
                 course: "Desserts",
                 ingredient: "Vegetables",
-                image: "/images/recipes/halo-halo.jpg",
+                image: "/images/recipes/halohalo.jpg",
                 ingredients: "Shaved ice\nEvaporated milk\nSweet beans\nNata de coco\nUbe halaya\nLeche flan",
                 instructions: "Put all sweet ingredients in a tall glass.\nTop with shaved ice.\nPour evaporated milk.\nAdd leche flan and ube on top.",
                 authorId: users[0]._id, // Lourainne
