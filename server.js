@@ -54,31 +54,48 @@ app.get("/recipes", async (req, res) => {
     if (q) query.title = {$regex: q, $options: "i"};
     if (authorId) query.authorId = authorId;
 
-    const recipes = await recipePage.find(query);
+    const recipes = await Recipe.find(query);
     res.json(recipes);
 });
 
-//getting recipe by id
+//getting recipe by id (UPDATED)
 app.get("/recipes/:id", async (req, res) => {
-    const recipe = await Recipe.findById(req.params.id);
-    res.json(recipe);
+    try {
+        const recipe = await Recipe.findById(req.params.id);
+        if (!recipe) return res.status(404).json({ error: "Recipe not found" });
+
+        const comments = await Comment.find({ recipe: recipe._id });
+        
+        const recipeData = recipe.toObject();
+        recipeData.comments = comments; 
+        
+        res.json(recipeData);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
-//posting new recipe
+//posting new recipe (UPDATED)
 app.post("/recipes", async (req, res) => {
-    const newRecipe = new Recipe({
-        title: req.body.title,
-        course: req.body.course,
-        ingredient: req.body.ingredient,
-        image: req.body.image || "",
-        ingredients: req.body.ingredients,
-        instructions: req.body.instructions,
-        authorId: req.body.authorId,
-        comments: []
-    });
+    try {
+        const categoryDoc = await Category.findOne({ name: req.body.course });
 
-    const savedRecipe = await newRecipe.save();
-    res.status(201).json(savedRecipe);
+        const newRecipe = new Recipe({
+            title: req.body.title,
+            course: req.body.course,
+            ingredient: req.body.ingredient,
+            image: req.body.image || "",
+            ingredients: req.body.ingredients,
+            instructions: req.body.instructions,
+            authorId: req.body.authorId,
+            category: categoryDoc ? categoryDoc._id : null
+        });
+
+        const savedRecipe = await newRecipe.save();
+        res.status(201).json(savedRecipe);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
 });
 
 //editing recipe
@@ -100,19 +117,35 @@ app.put("/recipes/:id", async (req, res) => {
 
 //deleting recipe
 app.delete("/recipes/:id", async (req, res) => {
-    await Recipe.findByIdAndDelete(req.params,id);
+    await Recipe.findByIdAndDelete(req.params.id);
     res.json({message: "Recipe deleted successfully."});
 });
 
-//posting comment
+//posting comment (UPDATED)
 app.post("/recipes/:id/comments", async (req, res) => {
-    const recipe = await Recipe.findById(req.params.id);
-    recipe.comments.push({
-        name: req.body.name, 
-        text: req.body.updatedRecipe
-    });
-    await recipe.save();
-    res.status(201).json(recipe);
+    try {
+        const newComment = new Comment({
+            recipe: req.params.id,
+            name: req.body.name,
+            text: req.body.text
+        });
+        await newComment.save();
+        res.status(201).json(newComment);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+});
+
+// count of recipes per category
+app.get("/categories/count", async (req, res) => {
+    try {
+        const counts = await Recipe.aggregate([
+            { $group: { _id: "$category", count: { $sum: 1 } } }
+        ]);
+        res.json(counts);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 app.listen(3000, () => {
