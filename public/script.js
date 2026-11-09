@@ -230,6 +230,7 @@ async function newRecipePage() {
         return;
     }
     
+    const imgEl = document.getElementById("recipe-img");
     const titleEl = document.getElementById("recipe-title");
     const ingredientsListEl = document.getElementById("ingredient-list");
     const instructionsListEl = document.getElementById("instruction-list");
@@ -243,6 +244,7 @@ async function newRecipePage() {
     const r = await res.json();
 
     titleEl.textContent = r.title;
+    if (imgEl && r.image) { imgEl.src = r.image; }
 
     ingredientsListEl.innerHTML = "";
     r.ingredients.split("\n").forEach(item => {
@@ -298,10 +300,12 @@ async function recipePage() {
     }
 
     async function loadDetails() {
+        const imgEl = document.getElementById("recipe-img"); 
         const res = await fetch(`${API}/${recipeId}`);
         const r = await res.json();
 
         titleEl.textContent = r.title;
+        if (imgEl && r.image) { imgEl.src = r.image; } 
         if (courseEl){ courseEl.textContent = r.course };
         if (ingredientEl){ ingredientEl.textContent = r.ingredient };
 
