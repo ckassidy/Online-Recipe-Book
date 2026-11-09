@@ -1,18 +1,22 @@
 const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv").config();
+
 const app = express();
+
+// Import your models
+const User = require("./models/user");
+const Recipe = require("./models/recipe");
+const Category = require("./models/category");
+const Comment = require("./models/comment");
 
 app.use(express.json());
 app.use(express.static("public"));
 
 //MongoDB----------------------------
-
-
-
-
-
-
-
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log("Connected to MongoDB Atlas!"))
+    .catch((err) => console.log("Database connection error:", err));
 //MongoDB----------------------------
 
 //ROUTES
